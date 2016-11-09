@@ -1,0 +1,29 @@
+* {font-family:Arial;}
+body {
+    background-image:url("http://www.burgeroff.org/wp-content/uploads/2012/10/mcdonalds_red_background1.jpg");
+    background-size:cover;
+}
+.content {
+    box-shadow:0 2px 10px 0 black;
+    padding:40px 0 20px 0;
+    margin:0 10%;
+    background-color:rgba(200,240,240,0.75);
+}
+.navbar {
+    margin:0 10%;
+}
+.container {
+    margin:0;
+    width:100%;
+    padding:0;
+}
+.title {
+    padding:10px;
+    margin-bottom:10px;
+}
+.panel-default {
+    border:1px solid rgb(200,100,100);
+}
+h1, h2, h3, h4, h5, h6 {
+    font-weight:bold;
+}

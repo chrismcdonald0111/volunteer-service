@@ -1,0 +1,35 @@
+{
+  "name": "volunteer-service",
+  "version": "1.0.0",
+  "description": "Volunteer Service AngularJS Application for The Ronald McDonald House of Central Indiana",
+  "author": "Chris McDonald, Austin Bange, Alex Sottile, Jordan Sloan",
+  "license": "MIT",
+  "homepage": "http://www.rmhccin.org/",
+  "main": "./src/main/angularjs/com.ronaldmcdonaldhouse.volunteerservice/static/js/library/calendar.js",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test*",
+    "demo*",
+    "gruntFile.js",
+    "package.json"
+  ],
+  "dependencies": {
+    "angular-ui-calendar": "latest",
+    "angular-ui-router": "latest",
+    "angular-ui-router-styles": "latest",
+    "angular": ">=1.4.x",
+    "jquery": "~2.1.4",
+    "fullcalendar": "~2.7.1",
+    "moment": ">=2.5.0"
+  },
+  "devDependencies": {
+    "angular-mocks": "~1.x",
+    "bootstrap-css": "2.3.1"
+  },
+  "resolutions": {
+    "jquery": "~2.1.4",
+    "angular": ">=1.4.x"
+  }
+}

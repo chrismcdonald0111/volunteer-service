@@ -1,0 +1,21 @@
+{
+  "name": "RonaldMcDonaldHouseVolunteerService",
+  "main": "www",
+  "version": "0.0.1",
+  "private": true,
+  "dependencies": {
+    "body-parser": "^1.12.2",
+    "cookie-parser": "latest",
+    "cors": "^2.5.3",
+    "errorhandler": "latest",
+    "express": "^4.0.0",
+    "express-session": "latest",
+    "express-handlebars": "^1.2.0",
+    "geocoder": "latest",
+    "jsonwebtoken": "latest",
+    "method-override": "*",
+    "mongoose": "latest",
+    "multer": "^0.1.8",
+    "ngrok": "latest"
+  }
+}
