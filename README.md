@@ -1,20 +1,20 @@
-### Client-Side (front-end)
+# Client-Side (front-end)
 ## AngularJS
 
-# Usage
+### Usage
 
     bower install
 
 
-# Minify
+### Minify
 
     grunt minify
 
-# Local Server
+### Local Server
 
     grunt serve
 
-# Testing
+### Testing
 
 We use karma and grunt to ensure the quality of the code.
 
@@ -23,14 +23,14 @@ We use karma and grunt to ensure the quality of the code.
     bower install
     grunt
 
-### Server-Side (back-end)
+# Server-Side (back-end)
 ## Node.js
 
-# Usage
+### Usage
 
     npm install
 
-# Local Server
+### Local Server
 
     node www
 
