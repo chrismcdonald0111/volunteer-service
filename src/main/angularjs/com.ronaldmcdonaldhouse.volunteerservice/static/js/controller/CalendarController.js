@@ -4,6 +4,9 @@ volunteerService.controller('CalendarController',
         var d = date.getDate();
         var m = date.getMonth();
         var y = date.getFullYear();
+        $scope.year;
+        $scope.month;
+        $scope.day;
 
         $scope.changeTo = 'Hungarian';
         /* event source that pulls from google.com */
@@ -41,16 +44,26 @@ volunteerService.controller('CalendarController',
         };
         $scope.clickOnDate = function(date, jsEvent, view)
         {
-            $scope.select
-            alert('Clicked on: ' + date.format());
-
-            alert('Coordinates: ' + jsEvent.pageX + ',' + jsEvent.pageY);
-
-            alert('Current view: ' + view.name);
-
-            // change the day's background color just for fun
-            $(this).css('background-color', 'red');
+            $scope.day = date.format('D');
+            $scope.month = date.format('M');
+            $scope.year = date.format('YYYY');
+            // console.log($scope.day);
+            // console.log($scope.month);
+            // console.log($scope.year);
+            // $scope.year = date.getYear();
+            // $scope.month = date.getMonth();
+            // $scope.day = date.getDay();
+            $scope.addEvent();
+            // alert('Clicked on: ' + date.format());
+            //
+            // alert('Coordinates: ' + jsEvent.pageX + ',' + jsEvent.pageY);
+            //
+            // alert('Current view: ' + view.name);
+            //
+            // // change the day's background color just for fun
+            // $(this).css('background-color', 'red');
         };
+
         /* alert on eventClick */
         $scope.alertOnEventClick = function( date, jsEvent, view){
             $scope.alertMessage = (date.title + ' was clicked ');
@@ -78,10 +91,23 @@ volunteerService.controller('CalendarController',
         };
         /* add custom event*/
         $scope.addEvent = function() {
+            // console.log($scope.day);
+            // console.log($scope.month);
+            // console.log($scope.year);
+            var newDate = new Date($scope.year, $scope.month, $scope.day);
+            console.log(d);
+            console.log(m);
+            console.log(y);
+            console.log(newDate.getDate());
+            // y = newDate.getFullYear();
+            // m = newDate.getMonth();
+            // d = newDate.getDate();
+            console.log(d);
+            console.log(m);
+            console.log(y);
             $scope.events.push({
-                title: 'New Volunteer Service',
-                start: new Date(y, m, 28),
-                end: new Date(y, m, 29),
+                title: 'Custom',
+                start: new Date(y, m, $scope.day),
                 className: ['newVolunteerService']
             });
         };
@@ -103,31 +129,43 @@ volunteerService.controller('CalendarController',
         };
         /* Render Tooltip */
         $scope.eventRender = function( event, element, view ) {
-            element.attr({'tooltip': event.title,
-                'tooltip-append-to-body': true});
+            element.attr({
+                'tooltip': event.title,
+                'tooltip-append-to-body': true
+            });
             $compile(element)($scope);
         };
         /* config object */
         $scope.uiConfig = {
             calendar:{
-                height: 450,
-                editable: true,
-                selectable: true,
+                height: 550,
+                editable: false,
+                eventLimit: 1,
                 header:{
                     left: 'title',
                     center: '',
                     right: 'today prev,next'
                 },
-                dayClick: function(date, jsEvent, view) {
-                    $scope.daysEvents = $scope.eventSources.filter(function(event){
-                        return event.start.isBetween(date, moment(date).add(1, 'days'));
-                    });
-                    $(".fc-day").removeClass("fc-selected");
-                    $(this).addClass("fc-selected");
-                },
-                eventClick: $scope.alertOnEventClick,
-                eventDrop: $scope.alertOnDrop,
-                eventResize: $scope.alertOnResize,
+                dayClick: $scope.clickOnDate,
+                    //function(date, jsEvent, view) {
+                    // $scope.events.push({
+                    //     title: 'New Volunteer Service',
+                    //     start: new Date(y, m, 28),
+                    //     end: new Date(y, m, 29),
+                    //     className: ['newVolunteerService']
+                    // });
+                    //addEvent();
+
+                    // alert('Clicked on: ' + date.format());
+                    //
+                    // alert('Coordinates: ' + jsEvent.pageX + ',' + jsEvent.pageY);
+                    //
+                    // alert('Current view: ' + view.name);
+                    //
+                    // // change the day's background color just for fun
+                    // $(this).css('background-color', 'red');
+
+                //}
                 eventRender: $scope.eventRender
             }
         };
