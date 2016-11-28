@@ -7,6 +7,7 @@ volunteerService.controller('CalendarController',
         $scope.year;
         $scope.month;
         $scope.day;
+        $scope.viewMonth;
 
         $scope.changeTo = 'Hungarian';
         /* event source that pulls from google.com */
@@ -47,13 +48,20 @@ volunteerService.controller('CalendarController',
             $scope.day = date.format('D');
             $scope.month = date.format('M');
             $scope.year = date.format('YYYY');
+            console.log(view.start._d.getMonth() + 2);
             // console.log($scope.day);
-            // console.log($scope.month);
+             console.log($scope.month);
             // console.log($scope.year);
             // $scope.year = date.getYear();
             // $scope.month = date.getMonth();
             // $scope.day = date.getDay();
-            $scope.addEvent();
+            $scope.viewMonth = view.start._d.getMonth() + 2;
+            if($scope.viewMonth == 13) {
+                $scope.viewMonth = 1;
+            }
+            if($scope.month == $scope.viewMonth) {
+                $scope.addEvent();
+            }
             // alert('Clicked on: ' + date.format());
             //
             // alert('Coordinates: ' + jsEvent.pageX + ',' + jsEvent.pageY);
@@ -95,19 +103,22 @@ volunteerService.controller('CalendarController',
             // console.log($scope.month);
             // console.log($scope.year);
             var newDate = new Date($scope.year, $scope.month, $scope.day);
-            console.log(d);
-            console.log(m);
-            console.log(y);
+            // var date = $("#calendar").fullCalendar('getDate');
+            // var month_int = date.format('M');
+            // console.log(month_int);
+            // console.log(d);
+            // console.log(m);
+            // console.log(y);
             console.log(newDate.getDate());
             // y = newDate.getFullYear();
             // m = newDate.getMonth();
             // d = newDate.getDate();
-            console.log(d);
-            console.log(m);
-            console.log(y);
+            // console.log(d);
+            // console.log(m);
+            // console.log(y);
             $scope.events.push({
                 title: 'Custom',
-                start: new Date(y, m, $scope.day),
+                start: new Date($scope.year, $scope.month - 1, $scope.day),
                 className: ['newVolunteerService']
             });
         };
