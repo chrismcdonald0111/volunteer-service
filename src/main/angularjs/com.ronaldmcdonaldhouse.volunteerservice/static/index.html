@@ -28,18 +28,15 @@
 
     </head>
     <body>
-        <nav class="navbar navbar-inverse navbar-fixed-top">
-            <div class="container-fluid">
-                <div class="navbar-header">
-                    <a class="navbar-brand" ui-sref="#" href="http://www.rmhccin.org/" target=blank">Ronald McDonald House</a>
-                </div>
-                <ul class="nav navbar-nav">
-                    <li><a ui-sref="home">Home</a></li>
-                    <li><a ui-sref="calendar">Calendar</a></li>
-                </ul>
-            </div>
-        </nav>
         <div class="container">
+            <div class="sidenav">
+                <a href="http://www.rmhccin.org/" target="blank"><img src="http://i1.wp.com/epics.butler.edu/wp-content/uploads/2016/09/rmchlogo.png?resize=300%2C119"/></a>
+                <hr>
+                <a ui-sref="home">Home</a>
+                <a ui-sref="calendar">Calendar</a>
+                <a ui-sref="contact">Contact</a>
+            </div>
+
             <div ui-view></div>
         </div>
     </body>

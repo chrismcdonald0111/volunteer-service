@@ -1,13 +1,16 @@
 * {font-family:Arial;}
+
 body {
-    background-image:url("http://www.burgeroff.org/wp-content/uploads/2012/10/mcdonalds_red_background1.jpg");
-    background-size:cover;
+    background: #6d0019;
+    background: -moz-linear-gradient(left,  #6d0019 1%, #8f0222 31%, #a90329 100%);
+    background: -webkit-linear-gradient(left,  #6d0019 1%,#8f0222 31%,#a90329 100%);
+    background: linear-gradient(to right,  #6d0019 1%,#8f0222 31%,#a90329 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#6d0019', endColorstr='#a90329',GradientType=1 );
 }
+
 .content {
-    box-shadow:0 2px 10px 0 black;
-    padding:40px 0 20px 0;
-    margin:0 10%;
-    background-color:rgba(200,240,240,0.75);
+    margin-left:150px;
+    padding:45px 0 20px 0;
 }
 .navbar {
     margin:0 10%;
@@ -18,12 +21,58 @@ body {
     padding:0;
 }
 .title {
-    padding:10px;
+    color:white;
+    padding:0 0 0 15px;
     margin-bottom:10px;
 }
 .panel-default {
-    border:1px solid rgb(200,100,100);
+    border:1px solid #6d0019;
+    background-color:rgba(255,255,255,0.8);
 }
 h1, h2, h3, h4, h5, h6 {
     font-weight:bold;
 }
+
+.title {color:white;}
+
+.sidenav {
+    height: 100%;
+    width:150px;
+    position: fixed;
+    z-index: 1;
+    top: 0;
+    left: 0;
+    background-color: black;
+    overflow-x: hidden;
+}
+.sidenav hr {margin-top:0;}
+.sidenav a {
+    text-align:center;
+    text-decoration: none;
+    font-size: 25px;
+    color: #818181;
+    display: block;
+    transition: 0.3s
+}
+
+/* When you mouse over the navigation links, change their color */
+.sidenav a:hover {
+    color: #f1f1f1;
+}
+
+/* On smaller screens, where height is less than 450px, change the style of the sidenav (less padding and a smaller font size) */
+@media screen and (max-height: 450px) {
+    .sidenav {padding-top: 15px;}
+    .sidenav a {font-size: 18px;}
+}
+
+/* FOOTER */
+footer {
+    color:white;
+    text-align:center;
+    font-size:0.8em;
+}
+footer a {
+    color:white;
+}
+footer a:hover {text-decoration:none;color:rgb(200,200,200);}
