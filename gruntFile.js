@@ -78,7 +78,7 @@ module.exports = function (grunt) {
         connect : {
             server : {
                 options : {
-                    port : 8000,
+                    port : 80,
                     open : true,
                     debug : true,
                     keepalive : true,
