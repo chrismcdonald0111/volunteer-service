@@ -24,6 +24,61 @@
 
                     <!--</div>-->
                     <div id="myPopover"></div>
+                    <div class="modal fade" id="myModal" role="dialog">
+                        <div class="modal-dialog modal-sm">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                    <h4 class="modal-title">Volunteer Sign Up Form</h4>
+                                </div>
+                                <form name="userForm" ng-submit="submitForm(userForm.$valid)">
+                                <div class="modal-body">
+                                         <!--Organization Name-->
+                                        <div class="form-group">
+                                            <label>Organization Name</label>
+                                            <input type="text" name="organizationName" class="form-control" ng-model="organizationName" required>
+                                        </div>
+
+                                        <!-- Contact Name -->
+                                        <div class="form-group">
+                                            <label>Contact Name</label>
+                                            <input type="text" name="contactName" class="form-control" ng-model="contactName" required>
+                                        </div>
+
+                                        <!--&lt;!&ndash; Phone Number &ndash;&gt;-->
+                                        <!--<div class="form-group">-->
+                                            <!--<label>Phone Number</label>-->
+                                            <!--<input type="text" name="phoneNumber" class="form-control" ng-model="phoneNumber" required>-->
+                                        <!--</div>-->
+
+                                        <!--&lt;!&ndash;&lt;!&ndash; Email &ndash;&gt;&ndash;&gt;-->
+                                        <!--&lt;!&ndash;<div class="form-group">&ndash;&gt;-->
+                                            <!--&lt;!&ndash;<label>Email</label>&ndash;&gt;-->
+                                            <!--&lt;!&ndash;<input type="text" name="email" class="form-control" ng-model="contactEmail" ng-minlength="7" required>&ndash;&gt;-->
+                                        <!--&lt;!&ndash;</div>&ndash;&gt;-->
+
+                                        <!--&lt;!&ndash; Number of Volunteers &ndash;&gt;-->
+                                        <!--<div class="form-group">-->
+                                            <!--<label>Number of Volunteers</label>-->
+                                            <!--<input type="text" name="numberOfVolunteers" class="form-control" ng-model="numberOfVolunteers" required>-->
+                                        <!--</div>-->
+
+                                        <!--&lt;!&ndash; Type of Service Project &ndash;&gt;-->
+                                        <!--<div class="form-group">-->
+                                            <!--<label>Type of Service Project</label>-->
+                                            <!--<input type="text" name="typeOfServiceProject" class="form-control" ng-model="typeOfServiceProject" required>-->
+                                        <!--</div>-->
+
+                                </div>
+                                <div class="modal-footer">
+                                    <!-- SUBMIT BUTTON -->
+                                    <button type="submit" class="btn btn-primary" ng-disabled="userForm.$invalid">Submit</button>
+                                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
 
                     <div class="span8">
                         <!--<tabset>-->
@@ -31,9 +86,9 @@
                                 <!--<tab-heading>-->
                                     <!--<i class="glyphicon glyphicon-bell"></i> Calendar One-->
                                 <!--</tab-heading>-->
-                                <div class="alert-success calAlert" ng-show="alertMessage != undefined && alertMessage != ''">
-                                    <h4>{{alertMessage}}</h4>
-                                </div>
+                                <!--<div class="alert-success calAlert" ng-show="alertMessage != undefined && alertMessage != ''">-->
+                                    <!--<h4>{{alertMessage}}</h4>-->
+                                <!--</div>-->
                                 <!--<div class="btn-toolbar">-->
                                     <!--<div class="btn-group">-->
                                         <!--<button class="btn btn-success" ng-click="changeView('day', 'calendar')">AgendaDay</button>-->

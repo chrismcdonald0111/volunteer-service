@@ -21,36 +21,31 @@ router.get('/', function(req, res) {
 });
 
 /**
- * HTTP GET: /service/:date
+ * HTTP GET: /service/:month/:year
  * Return service data by 'date'
  */
-router.get('/:date', function(req, res) {
-    Service.find({date: req.params.date}, function (err, service_data) {
+router.get('/:month/:year', function(req, res) {
+    Service.find({month: req.params.month, year: req.params.year}, function (err, service_data) {
         if(err) throw err;
         res.send(service_data);
     });
 });
-
 /**
  * HTTP POST: /service/new
  * Add new service data
  */
 router.post('/new', function(req, res) {
     Service.create({
-        service_id: req.body.service_id,
-        calendar_id: req.body.calendar_id,
-        service_status: req.body.service_status,
         date: req.body.date,
         year: req.body.year,
         month: req.body.month,
         day: req.body.day,
-        service_category: req.body.service_category,
-        service_order: req.body.service_order,
-        queue: req.body.queue,
-        queue_order: req.body.queue_order,
-        full_name: req.body.full_name,
-        service_name: req.body.service_name,
-        service_description: req.body.service_description
+        organization_name: req.body.organization_name,
+        contact_name: req.body.contact_name,
+        phone_number: req.body.phone_number,
+        contact_email: req.body.contact_email,
+        number_of_volunteers: req.body.number_of_volunteers,
+        type_of_service_project: req.body.type_of_service_project
     }, function (err, service_data) {
         if (err) throw err;
         res.send(service_data);
