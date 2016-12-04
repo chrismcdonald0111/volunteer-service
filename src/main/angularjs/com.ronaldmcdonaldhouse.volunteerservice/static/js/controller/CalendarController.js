@@ -90,7 +90,7 @@ volunteerService.controller('CalendarController', function($http, $scope, $compi
             $compile(element)($scope);
         };
 
-        $scope.retrieveMonthViewData = function(view) {
+        $scope.retrieveMonthViewEvents = function(view) {
             $scope.getEventsMonth(view.start._d.getMonth() + 2, view.start._d.getFullYear());
         };
 
@@ -114,9 +114,17 @@ volunteerService.controller('CalendarController', function($http, $scope, $compi
             $("#myModal").modal('show');
         };
 
+        $scope.closeModal= function(){
+            $("#myModal").modal('hide');
+        };
+
         $scope.submitForm = function() {
             if ($scope.userForm.$valid) {
-
+                console.log("submit");
+                $scope.postEvent();
+                $scope.getEventsMonth($scope.month, $scope.year);
+                $scope.closeModal();
+                window.location.reload();
             }
         };
 
@@ -131,7 +139,7 @@ volunteerService.controller('CalendarController', function($http, $scope, $compi
                     right: 'today prev,next'
                 },
                 dayClick: $scope.clickOnDate,
-                viewRender: $scope.retrieveMonthViewData,
+                viewRender: $scope.retrieveMonthViewEvents,
                 eventRender: $scope.eventRender
             }
         };
@@ -163,7 +171,8 @@ volunteerService.controller('CalendarController', function($http, $scope, $compi
                     type_of_service_project: $scope.type_of_service_project
                 }
             }).then(function successCallback(response){
-                $scope.loadMonthEvents(response);
+
+                //$scope.loadMonthEvents(response);
             }, function errorCallback(response) {
             });
         };

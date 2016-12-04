@@ -58,12 +58,17 @@ router.post('/new', function(req, res) {
  */
 router.post('/update', function(req, res) {
     Service.update({
-            full_name: req.body.full_name,
-            service_name: req.body.service_name,
-            service_description: req.body.service_description,
-            service_status: req.body.service_status
-        },
-        req.body, function(err, service_data) {
+            date: req.body.date,
+            year: req.body.year,
+            month: req.body.month,
+            day: req.body.day,
+            organization_name: req.body.organization_name,
+            contact_name: req.body.contact_name,
+            phone_number: req.body.phone_number,
+            contact_email: req.body.contact_email,
+            number_of_volunteers: req.body.number_of_volunteers,
+            type_of_service_project: req.body.type_of_service_project
+        }, function(err, service_data) {
         if(err) throw err;
         res.send(service_data);
     });

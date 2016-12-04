@@ -4,7 +4,7 @@
     <title>Volunteer Service</title>
     <!--CSS-->
     <!--LIBRARY-->
-    <link rel="stylesheet" href="/bower_components/bootstrap-css/css/bootstrap.css" />
+    <link rel="stylesheet" href="/bower_components/bootstrap-css/css/bootstrap.min.css" />
     <link rel="stylesheet" href="/bower_components/fullcalendar/dist/fullcalendar.css">
     <link rel="stylesheet" href="https://use.fontawesome.com/108208b1c7.css">
     <!--CUSTOM-->
@@ -13,11 +13,12 @@
     <link rel="stylesheet" href="css/contact.css" />
     <!--JS-->
     <!--LIBRARY-->
+    <script src="../../../../../bower_components/bootstrap-css/js/bootstrap.js"></script>
     <script src="../../../../../bower_components/jquery/dist/jquery.js"></script>
     <script src="../../../../../bower_components/angular/angular.js"></script>
     <script src="../../../../../bower_components/angular-ui-router/release/angular-ui-router.js"></script>
     <script src="../../../../../bower_components/angular-ui-router-styles/ui-router-styles.js"></script>
-    <script src="../../../../../bower_components/bootstrap-css/js/bootstrap.min.js"></script>
+
     <script src="../../../../../bower_components/moment/moment.js"></script>
     <script src="../../../../../bower_components/fullcalendar/dist/fullcalendar.js"></script>
     <script src="../../../../../bower_components/fullcalendar/dist/gcal.js"></script>
@@ -25,8 +26,8 @@
     <script src="js/library/calendar.js"></script>
     <!--CUSTOM-->
     <script src="app.js"></script>
-    <script src="js/controller/CalendarController.js"></script>
     <script src="js/controller/HomeController.js"></script>
+    <script src="js/controller/CalendarController.js"></script>
     <script src="js/controller/ContactController.js"></script>
 
 </head>
@@ -40,6 +41,7 @@
     </div>
 
     <div ui-view></div>
+
 </div>
 </body>
 </html>
