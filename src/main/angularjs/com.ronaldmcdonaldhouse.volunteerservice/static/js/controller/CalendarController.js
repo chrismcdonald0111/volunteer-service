@@ -32,9 +32,10 @@ volunteerService.controller('CalendarController', function($http, $scope, $compi
 
             /* check if an event exists for the date clicked on */
             var eventExists = false;
-            for(var k = 0; k<$scope.events.length - 1; k++) {
+            for(var k = 0; k<$scope.events.length; k++) {
                 if($scope.day == $scope.events[k].day) {
                     eventExists = true;
+                    break;
                 }
             }
             if(!eventExists && $scope.month == $scope.viewMonth) {
@@ -72,7 +73,6 @@ volunteerService.controller('CalendarController', function($http, $scope, $compi
             uiCalendarConfig.calendars[calendar].fullCalendar('changeView',view);
         };
 
-        /* Change View */
         $scope.renderCalendar = function(calendar) {
             $timeout(function() {
                 if(uiCalendarConfig.calendars[calendar]){
@@ -95,7 +95,7 @@ volunteerService.controller('CalendarController', function($http, $scope, $compi
         };
 
         $scope.loadMonthEvents = function(response) {
-            for(var k = 0; k<$scope.events.length; k++) {
+            for(var k = 0; k<$scope.events.length + 2; k++) {
                 $scope.events.splice(0, 1);
             }
             for(var i = 0; i<response.data.length; i++) {
@@ -105,6 +105,11 @@ volunteerService.controller('CalendarController', function($http, $scope, $compi
                     day: response.data[i].day,
                     month: response.data[i].month,
                     year: response.data[i].year,
+                    contact_name: response.data[i].contactName,
+                    phone_number: response.data[i].phoneNumber,
+                    contact_email: response.data[i].contactEmail,
+                    number_of_volunteers: response.data[i].numberOfVolunteers,
+                    type_of_service_project: response.data[i].typeOfServiceProject,
                     color: '#a90329'
                 });
             }
@@ -120,7 +125,6 @@ volunteerService.controller('CalendarController', function($http, $scope, $compi
 
         $scope.submitForm = function() {
             if ($scope.userForm.$valid) {
-                console.log("submit");
                 $scope.postEvent();
                 $scope.getEventsMonth($scope.month, $scope.year);
                 $scope.closeModal();
@@ -165,14 +169,13 @@ volunteerService.controller('CalendarController', function($http, $scope, $compi
                     day: $scope.day,
                     organization_name: $scope.organizationName,
                     contact_name: $scope.contactName,
-                    phone_number: $scope.phone_number,
-                    contact_email: $scope.contact_email,
-                    number_of_volunteers: $scope.number_of_volunteers,
-                    type_of_service_project: $scope.type_of_service_project
+                    phone_number: $scope.phoneNumber,
+                    contact_email: $scope.contactEmail,
+                    number_of_volunteers: $scope.numberOfVolunteers,
+                    type_of_service_project: $scope.typeOfServiceProject
                 }
             }).then(function successCallback(response){
-
-                //$scope.loadMonthEvents(response);
+                //console.log(response);
             }, function errorCallback(response) {
             });
         };
