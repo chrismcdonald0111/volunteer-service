@@ -18,7 +18,7 @@ var expressSession = require('express-session');
 /**
  * Mongoose ORM for MongoDB
  */
-mongoose.connect('mongodb://0.0.0.0/volunteerservice')
+mongoose.connect('mongodb://localhost/volunteerservice')
 
 var app = express();
 
