@@ -1,86 +1,82 @@
 <div role="main">
-    <section id="directives-calendar" class="content" ng-controller="CalendarController">
-        <!--<div class="page-header">-->
-        <div class="title">
-            <h1>Volunteer Service Calendar</h1>
-        </div>
-        <!--</div>-->
-        <div class="well">
-            <div class="row-fluid">
-                <!--<div class="span4">-->
-                <!--<div class="btn-group calTools">-->
-                <!--<button type="button" class="btn btn-primary" ng-click="addEvent()">-->
-                <!--Add Event-->
-                <!--</button>-->
-                <!--</div>-->
-
-                <!--<ul class="unstyled">-->
-                <!--<li ng-repeat="e in events">-->
-                <!--<div class="alert alert-info">-->
-                <!--<a class="close" ng-click="remove($index)"><i class="icon-remove"></i></a>-->
-                <!--<b> <input ng-model="e.title"></b>-->
-                <!--{{e.start | date:"MMM dd"}} - {{e.end | date:"MMM dd"}}-->
-                <!--</div>-->
-                <!--</li>-->
-                <!--</ul>-->
-
-                <!--</div>-->
-                <div id="myPopover"></div>
-
-                <div class="span8">
-                    <!--<tabset>-->
-                    <!--<tab select="renderCalendar('myCalendar1');">-->
-                    <!--<tab-heading>-->
-                    <!--<i class="glyphicon glyphicon-bell"></i> Calendar One-->
-                    <!--</tab-heading>-->
-                    <div class="alert-success calAlert" ng-show="alertMessage != undefined && alertMessage != ''">
-                        <h4>{{alertMessage}}</h4>
+        <section id="directives-calendar" class="content container-fluid" ng-controller="CalendarController">
+            <div class="title">
+                <h1>Volunteer Service Calendar</h1>
+            </div>
+            <div class="well">
+                <div class="row-fluid">
+                    <div class="span8">
+                        <div class="calendar" ng-model="eventSources" calendar="calendar" ui-calendar="uiConfig.calendar"></div>
                     </div>
-                    <!--<div class="btn-toolbar">-->
-                    <!--<div class="btn-group">-->
-                    <!--<button class="btn btn-success" ng-click="changeView('day', 'calendar')">AgendaDay</button>-->
-                    <!--<button class="btn btn-success" ng-click="changeView('month', 'calendar')">Month</button>-->
-                    <!--</div>-->
-                    <!--</div>-->
-                    <div class="calendar" ng-model="eventSources" calendar="calendar" ui-calendar="uiConfig.calendar"></div>
-                    <!--</tab>-->
-                    <!--<tab select="renderCalendar('myCalendar2');">-->
-                    <!--<tab-heading>-->
-                    <!--<i class="glyphicon glyphicon-bell"></i> Calendar Two-->
-                    <!--</tab-heading>-->
-                    <!--<div class="alert-success calAlert" ng-show="alertMessage != undefined && alertMessage != ''">-->
-                    <!--<h4>{{alertMessage}}</h4>-->
-                    <!--</div>-->
-                    <!--<div class="btn-toolbar">-->
-                    <!--<p class="pull-right lead">Calendar Two View Options</p>-->
-                    <!--<div class="btn-group">-->
-                    <!--<button class="btn btn-success" ng-click="changeView('agendaDay', 'myCalendar2')">AgendaDay</button>-->
-                    <!--<button class="btn btn-success" ng-click="changeView('agendaWeek', 'myCalendar2')">AgendaWeek</button>-->
-                    <!--<button class="btn btn-success" ng-click="changeView('month', 'myCalendar2')">Month</button>-->
-                    <!--</div>-->
-                    <!--</div>-->
-                    <!--<div class="calendar" ng-model="eventSources" calendar="myCalendar2" ui-calendar="uiConfig.calendar"></div>-->
-                    <!--</tab>-->
-                    <!--<tab select="renderCalendar('myCalendar3');">-->
-                    <!--<tab-heading>-->
-                    <!--<i class="glyphicon glyphicon-bell"></i> Calendar Three-->
-                    <!--</tab-heading>-->
-                    <!--<div class="alert-success calAlert">-->
-                    <!--<h4>This calendar uses the extended form</h4>-->
-                    <!--</div>-->
-                    <!--<div class="btn-toolbar">-->
-                    <!--<p class="pull-right lead">Calendar Three View Options</p>-->
-                    <!--<div class="btn-group">-->
-                    <!--<button class="btn btn-success" ng-click="changeView('agendaDay', 'myCalendar3')">AgendaDay</button>-->
-                    <!--<button class="btn btn-success" ng-click="changeView('agendaWeek', 'myCalendar3')">AgendaWeek</button>-->
-                    <!--<button class="btn btn-success" ng-click="changeView('month', 'myCalendar3')">Month</button>-->
-                    <!--</div>-->
-                    <!--</div>-->
-                    <!--<div class="calendar" ng-model="eventSources2" calendar="myCalendar3" ui-calendar="uiConfig.calendar"></div>-->
-                    <!--</tab>-->
-                    <!--</tabset>-->
+                    <div class="modal fade" id="myModal" role="dialog">
+                        <div class="modal-dialog modal-lg">
+                            <div class="modal-content">
+                                <form name="userForm" ng-submit="submitForm(userForm.$valid)">
+                                    <div class="modal-header">
+                                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                        <h2 class="modal-title">Sign Up Info</h2>
+                                    </div>
+                                    <div class="modal-body">
+                                             <!--Organization Name-->
+                                            <div class="form-group">
+                                                <label>Organization Name</label>
+                                                <input type="text" name="organizationName" class="form-control" ng-model="organizationName" required>
+                                            </div>
+
+                                            <!-- Contact Name -->
+                                            <div class="form-group">
+                                                <label>Contact Name</label>
+                                                <input type="text" name="contactName" class="form-control" ng-model="contactName" required>
+                                            </div>
+
+                                            <!-- Phone Number -->
+                                            <div class="form-group">
+                                                <label>Phone Number</label>
+                                                <input type="text" name="phoneNumber" class="form-control" ng-model="phoneNumber" required>
+                                            </div>
+
+
+                                            <!-- Email -->
+                                            <div class="form-group">
+                                                <label>Email</label>
+                                                <input type="text" name="contactEmail" class="form-control" ng-model="contactEmail" required>
+                                            </div>
+
+                                            <!-- Number of Volunteers -->
+                                            <div class="form-group">
+                                                <label>Number of Volunteers</label>
+                                                <input type="number" name="numberOfVolunteers" class="form-control" ng-model="numberOfVolunteers" required>
+                                            </div>
+
+                                            <!-- Type of Service Project -->
+                                            <div class="form-group">
+                                                <label>Type of Service Project</label>
+                                                <input type="text" name="typeOfServiceProject" class="form-control" ng-model="typeOfServiceProject" required>
+                                            </div>
+
+                                    </div>
+                                    <div class="modal-footer">
+                                        <!-- SUBMIT BUTTON -->
+                                        <button type="submit" class="btn btn-primary" ng-disabled="userForm.$invalid">Submit</button>
+                                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
-        </div>
-    </section>
+            <hr>
+            <footer>
+                <a href="http://rmhccin.org/site/wp-content/uploads/2013/03/Internet-Privacy-Policy.pdf" target="blank">Privacy Policy (PDF)</a> |
+                <a href="http://rmhccin.org/site/wp-content/uploads/2015/09/2014_990-Public-Version.pdf" target="blank">IRS Form 990 (PDF)</a> |
+                <a href="http://www.rmhccin.org/site/wp-content/uploads/2015/10/2015-Financial-Statements-Audited.pdf" target="blank">Annual Independent Audit (PDF)</a> |
+                <a href="http://rmhccin.org/site/wp-content/uploads/2015/10/RMHI_Annual-Report_2014_WEB.pdf" target="blank">Annual Report (PDF)</a> |
+                <a href="#/contact" ui-sref="contact">Contact Us</a>
+                <p>
+                    The following trademarks used herein are owned by McDonald's Corporation and its affiliates; McDonald's, Ronald McDonald House Charities, Ronald McDonald House Charities Logo,
+                    RMHC, Ronald McDonald House, Ronald McDonald Family Room, and Ronald McDonald Care Mobile.
+                </p>
+            </footer>
+        </section>
 </div>

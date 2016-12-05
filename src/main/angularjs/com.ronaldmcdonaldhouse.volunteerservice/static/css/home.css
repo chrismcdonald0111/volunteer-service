@@ -33,8 +33,6 @@ h1, h2, h3, h4, h5, h6 {
     font-weight:bold;
 }
 
-.title {color:white;}
-
 .sidenav {
     height: 100%;
     width:150px;
@@ -45,19 +43,19 @@ h1, h2, h3, h4, h5, h6 {
     background-color: black;
     overflow-x: hidden;
 }
-.sidenav hr {margin-top:0;}
-.sidenav a {
-    text-align:center;
+.sidenav a:not(:first-child) {
     text-decoration: none;
     font-size: 25px;
     color: #818181;
     display: block;
-    transition: 0.3s
+    transition: 0.3s;
+    padding-left:10px;
 }
 
 /* When you mouse over the navigation links, change their color */
-.sidenav a:hover {
+.sidenav a:not(:first-child):hover {
     color: #f1f1f1;
+    padding-left:20px;
 }
 
 /* On smaller screens, where height is less than 450px, change the style of the sidenav (less padding and a smaller font size) */

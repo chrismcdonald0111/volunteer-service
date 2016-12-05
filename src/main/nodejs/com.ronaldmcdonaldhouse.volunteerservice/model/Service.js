@@ -4,20 +4,16 @@
 var mongoose = require('mongoose');
 
 var serviceSchema = new mongoose.Schema({
-    service_id: Number,
-    calendar_id: Number,
-    service_status: String,
     date: String,
     year: Number,
     month: Number,
     day: Number,
-    service_category: String,
-    service_order: Number,
-    queue: Boolean,
-    queue_order: Number,
-    full_name: String,
-    service_name: String,
-    service_description: String
+    organization_name: String,
+    contact_name: String,
+    phone_number: String,
+    contact_email: String,
+    number_of_volunteers: Number,
+    type_of_service_project: String
 });
 
 module.exports = mongoose.model('Service', serviceSchema, 'Service');

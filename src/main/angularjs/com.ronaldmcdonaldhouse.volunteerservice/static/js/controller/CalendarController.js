@@ -1,89 +1,48 @@
-volunteerService.controller('CalendarController',
-    function($scope, $compile, $timeout, uiCalendarConfig) {
+volunteerService.controller('CalendarController', function($http, $scope, $compile, $timeout, uiCalendarConfig) {
         var date = new Date();
         var d = date.getDate();
         var m = date.getMonth();
         var y = date.getFullYear();
+
+        $scope.date = date;
+        $scope.newDate;
         $scope.year;
         $scope.month;
         $scope.day;
         $scope.viewMonth;
+        $scope.organizationName;
+        $scope.contactName;
+        $scope.phoneNumber;
+        $scope.contactEmail;
+        $scope.numberOfVolunteers;
+        $scope.typeOfServiceProject;
 
-        $scope.changeTo = 'Hungarian';
-        /* event source that pulls from google.com */
-        $scope.eventSource = {
-            url: "http://www.google.com/calendar/feeds/usa__en%40holiday.calendar.google.com/public/basic",
-            className: 'gcal-event',           // an option!
-            currentTimezone: 'America/Chicago' // an option!
-        };
         /* event source that contains custom events on the scope */
-        $scope.events = [
-            {title: 'All Day Event',start: new Date(y, m, 1)},
-            {title: 'Long Event',start: new Date(y, m, d - 5),end: new Date(y, m, d - 2)},
-            {id: 999,title: 'Repeating Event',start: new Date(y, m, d - 3, 16, 0),allDay: false},
-            {id: 999,title: 'Repeating Event',start: new Date(y, m, d + 4, 16, 0),allDay: false},
-            {title: 'Birthday Party',start: new Date(y, m, d + 1, 19, 0),end: new Date(y, m, d + 1, 22, 30),allDay: false},
-            {title: 'Click for Google',start: new Date(y, m, 28),end: new Date(y, m, 29),url: 'http://google.com/'}
-        ];
-        /* event source that calls a function on every view switch */
-        $scope.eventsF = function (start, end, timezone, callback) {
-            var s = new Date(start).getTime() / 1000;
-            var e = new Date(end).getTime() / 1000;
-            var m = new Date(start).getMonth();
-            var events = [{title: 'Feed Me ' + m,start: s + (50000),end: s + (100000),allDay: false, className: ['customFeed']}];
-            callback(events);
-        };
-
-        $scope.calEventsExt = {
-            color: '#f00',
-            textColor: 'yellow',
-            events: [
-                {type:'party',title: 'Lunch',start: new Date(y, m, d, 12, 0),end: new Date(y, m, d, 14, 0),allDay: false},
-                {type:'party',title: 'Lunch 2',start: new Date(y, m, d, 12, 0),end: new Date(y, m, d, 14, 0),allDay: false},
-                {type:'party',title: 'Click for Google',start: new Date(y, m, 28),end: new Date(y, m, 29),url: 'http://google.com/'}
-            ]
-        };
+        $scope.events = [];
         $scope.clickOnDate = function(date, jsEvent, view)
         {
             $scope.day = date.format('D');
             $scope.month = date.format('M');
             $scope.year = date.format('YYYY');
-            console.log(view.start._d.getMonth() + 2);
-            // console.log($scope.day);
-             console.log($scope.month);
-            // console.log($scope.year);
-            // $scope.year = date.getYear();
-            // $scope.month = date.getMonth();
-            // $scope.day = date.getDay();
+            $scope.newDate = new Date($scope.year, $scope.month, $scope.day);
             $scope.viewMonth = view.start._d.getMonth() + 2;
             if($scope.viewMonth == 13) {
                 $scope.viewMonth = 1;
             }
-            if($scope.month == $scope.viewMonth) {
-                $scope.addEvent();
+
+            /* check if an event exists for the date clicked on */
+            var eventExists = false;
+            for(var k = 0; k<$scope.events.length; k++) {
+                if($scope.day == $scope.events[k].day) {
+                    eventExists = true;
+                    break;
+                }
             }
-            // alert('Clicked on: ' + date.format());
-            //
-            // alert('Coordinates: ' + jsEvent.pageX + ',' + jsEvent.pageY);
-            //
-            // alert('Current view: ' + view.name);
-            //
-            // // change the day's background color just for fun
-            // $(this).css('background-color', 'red');
+            if(!eventExists && $scope.month == $scope.viewMonth) {
+                $scope.openModal();
+            }
         };
 
-        /* alert on eventClick */
-        $scope.alertOnEventClick = function( date, jsEvent, view){
-            $scope.alertMessage = (date.title + ' was clicked ');
-        };
-        /* alert on Drop */
-        $scope.alertOnDrop = function(event, delta, revertFunc, jsEvent, ui, view){
-            $scope.alertMessage = ('Event Dropped to make dayDelta ' + delta);
-        };
-        /* alert on Resize */
-        $scope.alertOnResize = function(event, delta, revertFunc, jsEvent, ui, view ){
-            $scope.alertMessage = ('Event Resized to make dayDelta ' + delta);
-        };
         /* add and removes an event source of choice */
         $scope.addRemoveEventSource = function(sources,source) {
             var canAdd = 0;
@@ -97,29 +56,12 @@ volunteerService.controller('CalendarController',
                 sources.push(source);
             }
         };
+
         /* add custom event*/
         $scope.addEvent = function() {
-            // console.log($scope.day);
-            // console.log($scope.month);
-            // console.log($scope.year);
-            var newDate = new Date($scope.year, $scope.month, $scope.day);
-            // var date = $("#calendar").fullCalendar('getDate');
-            // var month_int = date.format('M');
-            // console.log(month_int);
-            // console.log(d);
-            // console.log(m);
-            // console.log(y);
-            console.log(newDate.getDate());
-            // y = newDate.getFullYear();
-            // m = newDate.getMonth();
-            // d = newDate.getDate();
-            // console.log(d);
-            // console.log(m);
-            // console.log(y);
             $scope.events.push({
-                title: 'Custom',
-                start: new Date($scope.year, $scope.month - 1, $scope.day),
-                className: ['newVolunteerService']
+                title: $scope.organizationName,
+                start: new Date($scope.year, $scope.month - 1, $scope.day)
             });
         };
         /* remove event */
@@ -130,7 +72,7 @@ volunteerService.controller('CalendarController',
         $scope.changeView = function(view,calendar) {
             uiCalendarConfig.calendars[calendar].fullCalendar('changeView',view);
         };
-        /* Change View */
+
         $scope.renderCalendar = function(calendar) {
             $timeout(function() {
                 if(uiCalendarConfig.calendars[calendar]){
@@ -138,6 +80,7 @@ volunteerService.controller('CalendarController',
                 }
             });
         };
+
         /* Render Tooltip */
         $scope.eventRender = function( event, element, view ) {
             element.attr({
@@ -146,7 +89,49 @@ volunteerService.controller('CalendarController',
             });
             $compile(element)($scope);
         };
-        /* config object */
+
+        $scope.retrieveMonthViewEvents = function(view) {
+            $scope.getEventsMonth(view.start._d.getMonth() + 2, view.start._d.getFullYear());
+        };
+
+        $scope.loadMonthEvents = function(response) {
+            for(var k = 0; k<$scope.events.length + 2; k++) {
+                $scope.events.splice(0, 1);
+            }
+            for(var i = 0; i<response.data.length; i++) {
+                $scope.events.push({
+                    title: response.data[i].organization_name,
+                    start: new Date(response.data[i].year, response.data[i].month - 1, response.data[i].day),
+                    day: response.data[i].day,
+                    month: response.data[i].month,
+                    year: response.data[i].year,
+                    contact_name: response.data[i].contactName,
+                    phone_number: response.data[i].phoneNumber,
+                    contact_email: response.data[i].contactEmail,
+                    number_of_volunteers: response.data[i].numberOfVolunteers,
+                    type_of_service_project: response.data[i].typeOfServiceProject,
+                    color: '#a90329'
+                });
+            }
+        };
+
+        $scope.openModal= function(){
+            $("#myModal").modal('show');
+        };
+
+        $scope.closeModal= function(){
+            $("#myModal").modal('hide');
+        };
+
+        $scope.submitForm = function() {
+            if ($scope.userForm.$valid) {
+                $scope.postEvent();
+                $scope.getEventsMonth($scope.month, $scope.year);
+                $scope.closeModal();
+                window.location.reload();
+            }
+        };
+
         $scope.uiConfig = {
             calendar:{
                 height: 550,
@@ -158,42 +143,43 @@ volunteerService.controller('CalendarController',
                     right: 'today prev,next'
                 },
                 dayClick: $scope.clickOnDate,
-                    //function(date, jsEvent, view) {
-                    // $scope.events.push({
-                    //     title: 'New Volunteer Service',
-                    //     start: new Date(y, m, 28),
-                    //     end: new Date(y, m, 29),
-                    //     className: ['newVolunteerService']
-                    // });
-                    //addEvent();
-
-                    // alert('Clicked on: ' + date.format());
-                    //
-                    // alert('Coordinates: ' + jsEvent.pageX + ',' + jsEvent.pageY);
-                    //
-                    // alert('Current view: ' + view.name);
-                    //
-                    // // change the day's background color just for fun
-                    // $(this).css('background-color', 'red');
-
-                //}
+                viewRender: $scope.retrieveMonthViewEvents,
                 eventRender: $scope.eventRender
             }
         };
 
-        // $scope.changeLang = function() {
-        //     if($scope.changeTo === 'Hungarian'){
-        //         $scope.uiConfig.calendar.dayNames = ["Vasárnap", "Hétfő", "Kedd", "Szerda", "Csütörtök", "Péntek", "Szombat"];
-        //         $scope.uiConfig.calendar.dayNamesShort = ["Vas", "Hét", "Kedd", "Sze", "Csüt", "Pén", "Szo"];
-        //         $scope.changeTo= 'English';
-        //     } else {
-        //         $scope.uiConfig.calendar.dayNames = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
-        //         $scope.uiConfig.calendar.dayNamesShort = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
-        //         $scope.changeTo = 'Hungarian';
-        //     }
-        // };
+        $scope.getEventsMonth = function(month, year) {
+            $http({
+                method: 'GET',
+                url: 'http://34.193.243.89:3000/service/' + month + '/' + year
+            }).then(function successCallback(response){
+                $scope.loadMonthEvents(response);
+            }, function errorCallback(response) {
+            });
+        };
+
+        $scope.postEvent = function() {
+            $http({
+                method: 'POST',
+                url: 'http://34.193.243.89:3000/service/new',
+                data: {
+                    date: $scope.newDate,
+                    year: $scope.year,
+                    month: $scope.month,
+                    day: $scope.day,
+                    organization_name: $scope.organizationName,
+                    contact_name: $scope.contactName,
+                    phone_number: $scope.phoneNumber,
+                    contact_email: $scope.contactEmail,
+                    number_of_volunteers: $scope.numberOfVolunteers,
+                    type_of_service_project: $scope.typeOfServiceProject
+                }
+            }).then(function successCallback(response){
+                //console.log(response);
+            }, function errorCallback(response) {
+            });
+        };
+
         /* event sources array*/
-        $scope.eventSources = [$scope.events, $scope.eventSource, $scope.eventsF];
-        $scope.eventSources2 = [$scope.calEventsExt, $scope.eventsF, $scope.events];
-    });
-/* EOF */
+        $scope.eventSources = [$scope.events];
+});

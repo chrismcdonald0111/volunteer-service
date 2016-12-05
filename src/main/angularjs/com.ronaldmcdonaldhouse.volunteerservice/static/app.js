@@ -22,12 +22,25 @@ volunteerService.config(["$stateProvider", "$urlRouterProvider", function($state
         })
         .state("calendar", {
             url: "/calendar",
+            templateUrl: "view/calendar.html",
+            controller: "CalendarController",
             views: {
                 "": {
                     templateUrl: "view/calendar.html",
-                    controller: "CalendarController",
                     data: {
-                        css: 'styles/calendar.css'
+                        css: 'css/calendar.css'
+                    }
+                }
+            }
+        })
+        .state("contact", {
+            url: "/contact",
+            views: {
+                "": {
+                    templateUrl: "view/contact.html",
+                    controller: "ContactController",
+                    data: {
+                        css: 'css/contact.css'
                     }
                 }
             }

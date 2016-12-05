@@ -100,3 +100,12 @@ section {
 .calTools{
 	margin-bottom: 10px;
 }
+
+.title {
+	color:white;
+	padding:0 0 0 15px;
+	margin-bottom:10px;
+}
+.modal-header, .modal-footer {
+	background-color:rgb(220,220,220);
+}
