@@ -38,7 +38,7 @@ volunteerService.controller('CalendarController', function($http, $scope, $compi
                     break;
                 }
             }
-            if(!eventExists && $scope.month == $scope.viewMonth) {
+            if(!eventExists && $scope.month == $scope.viewMonth && ($scope.month >= $scope.date.getMonth() && $scope.day > $scope.date.getDate())) {
                 $scope.openModal();
             }
         };
