@@ -184,7 +184,7 @@ volunteerService.controller('CalendarController', function($http, $scope, $compi
         $scope.postEmail = function() {
             $http({
                 method: 'POST',
-                url: 'http://localhost:3000/email/send',
+                url: 'http://34.193.243.89:3000/email/send',
                 data: {
                     date: $scope.newDate,
                     year: $scope.year,
