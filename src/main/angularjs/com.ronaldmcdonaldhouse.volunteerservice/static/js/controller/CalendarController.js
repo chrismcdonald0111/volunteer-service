@@ -38,8 +38,20 @@ volunteerService.controller('CalendarController', function($http, $scope, $compi
                     break;
                 }
             }
-            if(!eventExists && $scope.month == $scope.viewMonth && ($scope.year >= $scope.date.getFullYear() && $scope.month >= $scope.date.getMonth() + 1 && $scope.day > $scope.date.getDate())) {
-                $scope.openModal();
+            if(!eventExists && $scope.month == $scope.viewMonth && $scope.year >= $scope.date.getFullYear()) {
+                if($scope.month == $scope.date.getMonth() + 1) {
+                    if($scope.day > $scope.date.getDate()) {
+                        $scope.openModal();
+                    }
+                }
+                else if($scope.year == $scope.date.getFullYear()) {
+                    if($scope.month > $scope.date.getMonth() + 1) {
+                        $scope.openModal();
+                    }
+                }
+                else {
+                    $scope.openModal();
+                }
             }
         };
 
