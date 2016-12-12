@@ -8,11 +8,11 @@
                     <div class="span8">
                         <div class="calendar" ng-model="eventSources" calendar="calendar" ui-calendar="uiConfig.calendar"></div>
                     </div>
-                    <form name="userForm" ng-submit="submitForm(userForm.$valid)">
+
                     <div class="modal fade" id="myModal" role="dialog">
                         <div class="modal-dialog modal-lg">
                             <div class="modal-content">
-
+                                <form name="userForm" ng-submit="submitForm(userForm.$valid)">
                                     <div class="modal-header">
                                         <button type="button" class="close" data-dismiss="modal">&times;</button>
                                         <h2 class="modal-title">Sign Up Info</h2>
@@ -61,11 +61,10 @@
                                         <button type="submit" class="btn btn-primary" ng-disabled="userForm.$invalid">Submit</button>
                                         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
                                     </div>
-
+                                </form>
                             </div>
                         </div>
                     </div>
-                    </form>
                 </div>
             </div>
             <hr>
