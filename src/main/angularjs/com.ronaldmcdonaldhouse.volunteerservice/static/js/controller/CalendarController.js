@@ -38,8 +38,20 @@ volunteerService.controller('CalendarController', function($http, $scope, $compi
                     break;
                 }
             }
-            if(!eventExists && $scope.month == $scope.viewMonth) {
-                $scope.openModal();
+            if(!eventExists && $scope.month == $scope.viewMonth && $scope.year >= $scope.date.getFullYear()) {
+                if($scope.month == $scope.date.getMonth() + 1) {
+                    if($scope.day > $scope.date.getDate()) {
+                        $scope.openModal();
+                    }
+                }
+                else if($scope.year == $scope.date.getFullYear()) {
+                    if($scope.month > $scope.date.getMonth() + 1) {
+                        $scope.openModal();
+                    }
+                }
+                else {
+                    $scope.openModal();
+                }
             }
         };
 
@@ -126,6 +138,7 @@ volunteerService.controller('CalendarController', function($http, $scope, $compi
         $scope.submitForm = function() {
             if ($scope.userForm.$valid) {
                 $scope.postEvent();
+                $scope.postEmail();
                 $scope.getEventsMonth($scope.month, $scope.year);
                 $scope.closeModal();
                 window.location.reload();
@@ -162,6 +175,28 @@ volunteerService.controller('CalendarController', function($http, $scope, $compi
             $http({
                 method: 'POST',
                 url: 'http://34.193.243.89:3000/service/new',
+                data: {
+                    date: $scope.newDate,
+                    year: $scope.year,
+                    month: $scope.month,
+                    day: $scope.day,
+                    organization_name: $scope.organizationName,
+                    contact_name: $scope.contactName,
+                    phone_number: $scope.phoneNumber,
+                    contact_email: $scope.contactEmail,
+                    number_of_volunteers: $scope.numberOfVolunteers,
+                    type_of_service_project: $scope.typeOfServiceProject
+                }
+            }).then(function successCallback(response){
+                //console.log(response);
+            }, function errorCallback(response) {
+            });
+        };
+
+        $scope.postEmail = function() {
+            $http({
+                method: 'POST',
+                url: 'http://34.193.243.89:3000/email/send',
                 data: {
                     date: $scope.newDate,
                     year: $scope.year,

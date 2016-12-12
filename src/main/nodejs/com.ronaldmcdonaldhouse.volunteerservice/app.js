@@ -14,6 +14,7 @@ var methodOverride = require('method-override');
 var mongoose = require('mongoose');
 var multer = require('multer');
 var expressSession = require('express-session');
+var nodemailer = require('nodemailer');
 
 /**
  * Mongoose ORM for MongoDB
@@ -46,12 +47,14 @@ app.use(methodOverride(function(req) {
  */
 var calendar = require('./controller/CalendarController');
 var service = require('./controller/ServiceController');
+var email = require('./controller/EmailController');
 
 /**
  * Use the set routes
  */
 app.use('/calendar', calendar);
 app.use('/service', service);
+app.use('/email', email);
 
 /**
  * Handle 404 & 500 errors
